@@ -1,0 +1,94 @@
+## Meta Parameters ##
+[meta]
+# scaling factor for template thresholds
+threshold_factor = 0.6
+# target % of onset templates to give ~70 timestep prediction plateau
+pct_dendrite_spikes = 0.6
+# force all templates of same syllable type to use min vth for that syllable
+normalize_syllables = false
+# amount of time to add to files for runtime
+runtime_buffer = 100
+# frame rate of the timesteps in loihi
+loihi_frate = 300
+
+## Neuron Parameters ## 
+[neuron]
+# neuron parameters specify the attributes of the neurons in the various
+# layers of the network
+
+[neuron.template]
+# vth -- calculated from meta:threshold_factor
+du = 4095
+dv = 1000
+refractory_period = 32
+
+[neuron.template_prediction]
+# dendrite parameters
+# vth_dend = int(cond_id * meta:pct_dendrite_spikes / 5)
+du_dend = 4095
+dv_dend = 100
+# soma parameters
+vth_soma = 2
+du_soma = 4095
+dv_soma = 1000
+
+[neuron.decision]
+vth = 0
+du = 4095
+dv = 4095
+refractory_period = 20
+
+[neuron.pre_coincidence]
+du = 4095
+# vth = int(cond_id * meta:pct_dendrite_spikes / 5)
+dv = 100
+refractory_period = 10
+
+[neuron.coincidence]
+vth = 11
+du = 4095
+# dv == int(0.3 * 4096)
+dv = 1228
+
+[neuron.binary_prediction]
+# the vths will need to scale properly w/ weight and num. binary. dets per type
+# dendrite parameters
+dv_dend = 100
+vth_dend = 8
+# soma parameters
+dv_soma = 1000
+vth_soma = 10
+
+# layer connection parameters
+[synapse]
+# ######## Layer Codes #########
+# Feature Onset:             fon
+# Feature Offset:            fof
+# Feature Input (Both):      fin
+# Binary Onset:              bon
+# Binary Input:              bin
+# Template Onset:            ton
+# Template Offset:           tof
+# Template Layers (Both):    tpt
+# Template Prediction:       tpd
+# Pre-Coincidence:           pcd
+# Coincidence:               ccd
+# Binary Prediction:         bpd
+# Decision:                  dec
+# ##############################
+
+# Synapse parameters: 
+# Labelled as <input_layer>_<output_layer>.parameter = value
+fin_tpt.weight = 2
+tpt_tpd.weight_dend = 1
+tpt_tpd.weight_soma = 3
+tpt_pcd.weight = 1
+tpt_pcd.delay = 1 # TODO: check this w/ bala's code
+pcd_ccd.weight = 10
+ccd_bpd.weight = 48
+# ccd_tpd.weight = - cond_id
+bin_bpd.weight = 11
+# bin_bpd.delay = max_template_delay
+# tpt_tpd.max_delay = tpt_tpd.max_delay
+# bpd_self.weight = (- ccd_bpd.weight)
+bpd_dec.weight = 1 # dec vth == 0
