@@ -1,0 +1,70 @@
+{
+    "meta": {
+        "threshold_factor": 0.6,
+        "pct_dendrite_spikes": 0.6,
+        "normalize_syllables": false,
+        "runtime_buffer": 100,
+        "loihi_frate": 300
+    },
+    "neuron": {
+        "template": {
+            "du": 4095,
+            "dv": 1000,
+            "refractory_period": 32
+        },
+        "template_prediction": {
+            "du_dend": 4095,
+            "dv_dend": 100,
+            "vth_soma": 2,
+            "du_soma": 4095,
+            "dv_soma": 1000
+        },
+        "decision": {
+            "vth": 0,
+            "du": 4095,
+            "dv": 4095,
+            "refractory_period": 20
+        },
+        "pre_coincidence": {
+            "du": 4095,
+            "dv": 100,
+            "refractory_period": 10
+        },
+        "coincidence": {
+            "vth": 11,
+            "du": 4095,
+            "dv": 1228
+        },
+        "binary_prediction": {
+            "dv_dend": 100,
+            "vth_dend": 8,
+            "dv_soma": 1000,
+            "vth_soma": 10
+        }
+    },
+    "synapse": {
+        "fin_tpt": {
+            "weight": 2
+        },
+        "tpt_tpd": {
+            "weight_dend": 1,
+            "weight_soma": 3
+        },
+        "tpt_pcd": {
+            "weight": 1,
+            "delay": 1
+        },
+        "pcd_ccd": {
+            "weight": 10
+        },
+        "ccd_bpd": {
+            "weight": 48
+        },
+        "bin_bpd": {
+            "weight": 11
+        },
+        "bpd_dec": {
+            "weight": 1
+        }
+    }
+}
