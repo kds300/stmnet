@@ -1,7 +1,10 @@
 # STMNet
 Spike Template Matching Network implemented using the Lava neuromorphic computing framework.
 
-This is a public release of code originally written by @kds300 and @bala-git9.
+## Contributors
+The original code was developed in a private repository, originally authored by:
+- [@kds300](https://www.github.com/kds300)
+- [@bala-git9](https://www.github.com/bala-git9)
 
 ## Usage
 This package provides a framework for building Lava networks that perform template matching on spike sequences.
