@@ -1,4 +1,12 @@
 """STMNet Input/Output Processes
+
+
+Classes
+-------
+SpikeInputLayer
+    Lava process for providing spike input layer to a network.
+SpikeOutputLayer
+    Lava process for receiving spike output from a network.
 """
 
 import numpy as np
