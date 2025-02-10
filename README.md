@@ -36,3 +36,8 @@ Supports binary input processes and spike output processes.
 ### Proc
 Contains the lava processes and models for the custom neurons used in the network.
 The models are only available for fixed-point CPU implementations.
+
+#### Template Layer
+The `TemplateLayer` class is an isolated template matching layer of the network.
+The layer contains the sparse synapse encoding of the templates and the LIF neurons for detecting the templates.
+While the class itself is not a true Lava process, it is composed of Lava processes and designed to function similarly to a hierarchical process.
